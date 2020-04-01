@@ -1,0 +1,124 @@
+version: '3'
+
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb_assetsmgr
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - nw1
+
+  rabbitmq:
+    image: rabbitmq:3.8.2-management
+    container_name: rabbitmq_assetsmgr
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - nw1
+
+  config-service:
+    build:
+      context: .
+      dockerfile: ./config-service/Dockerfile
+    container_name: config_svc_assetsmgr
+    restart: always
+    ports:
+      - 8888:8888
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: mongodb:27017, rabbitmq:15672
+      WAIT_AFTER_HOSTS: 5
+
+  discovery-service:
+    build:
+      context: .
+      dockerfile: ./discovery-service/Dockerfile
+    container_name: discovery_svc_assetsmgr
+    restart: always
+    ports:
+      - 8761:8761
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: config-service:8888
+      WAIT_AFTER_HOSTS: 5
+
+  gateway-service:
+    build:
+      context: .
+      dockerfile: ./gateway-service/Dockerfile
+    container_name: gateway_svc_assetsmgr
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: discovery-service:8761
+      WAIT_AFTER_HOSTS: 5
+
+  assets-service:
+    build:
+      context: .
+      dockerfile: ./assets-service/Dockerfile
+    container_name: assets_svc_assetsmgr
+    restart: always
+    ports:
+      - 8881:8881
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: discovery-service:8761
+      WAIT_AFTER_HOSTS: 5
+
+  search-service:
+    build:
+      context: .
+      dockerfile: ./search-service/Dockerfile
+    container_name: search_svc_assetsmgr
+    restart: always
+    ports:
+      - 8882:8882
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: discovery-service:8761
+      WAIT_AFTER_HOSTS: 5
+
+  reports-service:
+    build:
+      context: .
+      dockerfile: ./reports-service/Dockerfile
+    container_name: reports_svc_assetsmgr
+    restart: always
+    ports:
+      - 8883:8883
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: discovery-service:8761, search-service:8882
+      WAIT_AFTER_HOSTS: 5
+
+  ui-frontend:
+    container_name: frontend_svc_assetsmgr
+    build:
+      context: .
+      dockerfile: ./ui-frontend/Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - nw1
+    environment:
+      WAIT_HOSTS: mongodb:27017, rabbitmq:15672, gateway-service:8080
+      WAIT_HOST_TIMEOUT: 60
+      WAIT_SLEEP_INTERVAL: 20
+
+networks:
+  nw1:
+    external: false
