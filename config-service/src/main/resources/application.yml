@@ -1,0 +1,42 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  profiles:
+    active: native
+
+  cloud:
+    bus:
+      enabled: on
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+  #        git:
+  #          uri: https://github.com/tyomakr/ITAssetsManager.git
+  #          search-paths: configurations
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://discovery-service:8761/eureka}
+    fetch-registry: on
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  #bus-env, bus-refresh, health
+  endpoint:
+    health:
+      show-details: always

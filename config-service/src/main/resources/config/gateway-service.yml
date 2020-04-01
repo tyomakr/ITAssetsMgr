@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://discovery-service:8761/eureka}
+
+ribbon:
+  ReadTimeout: 60000
+
+spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+zuul:
+  prefix: "/api"
+  strip-prefix: true
+  routes:
+    assets:
+      serviceId: assets-service
+      strip-prefix: false
+    reports:
+      serviceId: reports-service
+      strip-prefix: false
+
+
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          predicates:
+#            - name: Path
+#              args:
+#                pattern: "'/api/'+serviceId.toLowerCase()+'/**'"
+#          filters:
+#            - name: RewritePath
+#              args:
+#                regexp: "'/api/' + serviceId.toLowerCase() + '/(?<remaining>.*)'"
+#                replacement: "'/${remaining}'"
+#            - name: Hystrix
+#              args:
+#                name: fallbackAssets
+#                fallbackUri: forward:/fallback-assets
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always
+
+app:
+  jwtSecret: mySecretKey111
+  jwtExpirationMs: 86400000
