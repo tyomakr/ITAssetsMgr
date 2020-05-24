@@ -1,0 +1,30 @@
+server:
+  port: 8882
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://discovery-service:8761/eureka}
+    fetch-registry: true
+
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: assetsmgr
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always

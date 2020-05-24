@@ -1,0 +1,1 @@
+used https://github.com/ufoscout/docker-compose-wait
