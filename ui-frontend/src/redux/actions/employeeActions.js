@@ -1,5 +1,6 @@
-import backendApi from "../../services/backendApis/backendAssetsApi";
+import backendApi from "../../services/backendApis/backendApi";
 import history from "../../components/history";
+import backendReportsApi from "../../services/backendApis/backendApi";
 
 export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
 export const GET_EMPLOYEE = 'GET_EMPLOYEE';
@@ -9,7 +10,7 @@ export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 
 export const getEmployeesAction = () => async dispatch => {
-    const response = await backendApi.get(`/employees`);
+    const response = await backendReportsApi.getAssetsData().get(`/employees`);
     dispatch({
         type: GET_EMPLOYEES,
         payload: response.data
@@ -17,7 +18,7 @@ export const getEmployeesAction = () => async dispatch => {
 };
 
 export const getEmployeeAction = id => async dispatch => {
-    const response = await backendApi.get(`/employees/${id}`);
+    const response = await backendReportsApi.getAssetsData().get(`/employees/${id}`);
     dispatch({
         type: GET_EMPLOYEE,
         payload: response.data
@@ -25,7 +26,7 @@ export const getEmployeeAction = id => async dispatch => {
 };
 
 export const createEmployeeAction = (formValues) => async (dispatch) => {
-    const response = await backendApi.post('/employees', { ...formValues });
+    const response = await backendReportsApi.getAssetsData().post('/employees', { ...formValues });
     dispatch({
         type: CREATE_EMPLOYEE,
         payload: response.data
@@ -33,7 +34,7 @@ export const createEmployeeAction = (formValues) => async (dispatch) => {
 };
 
 export const updateEmployeeAction = (id, formValues) => async (dispatch) => {
-    const response = await backendApi.put(`/employees/${id}`, {...formValues });
+    const response = await backendReportsApi.getAssetsData().put(`/employees/${id}`, {...formValues });
     dispatch({
         type: UPDATE_EMPLOYEE,
         payload: response.data
@@ -41,7 +42,7 @@ export const updateEmployeeAction = (id, formValues) => async (dispatch) => {
 };
 
 export const deleteEmployeeAction = id => async dispatch => {
-    await backendApi.delete(`/employees/${id}`);
+    await backendReportsApi.getAssetsData().delete(`/employees/${id}`);
     dispatch({
         type: DELETE_EMPLOYEE,
         payload: id

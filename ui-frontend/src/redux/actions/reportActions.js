@@ -1,4 +1,4 @@
-import backendApi from "../../services/backendApis/backendReportsApi";
+import backendApi from "../../services/backendApis/backendApi";
 
 export const CREATE_REPORT = 'CREATE_REPORT';
 

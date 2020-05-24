@@ -1,16 +1,18 @@
-package ru.otus.assetsmgr.searchsvc.domain;
+package ru.otus.spring.assetsmgr.common.models.domain;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import ru.otus.assetsmgr.searchsvc.domain.enums.AssetType;
-import ru.otus.assetsmgr.searchsvc.domain.enums.Status;
+import ru.otus.spring.assetsmgr.common.models.domain.enums.AssetType;
+import ru.otus.spring.assetsmgr.common.models.domain.enums.Status;
 
 
 @Document(collection = "assets")
 @Data
+@Getter
 @NoArgsConstructor
 public class Asset {
 

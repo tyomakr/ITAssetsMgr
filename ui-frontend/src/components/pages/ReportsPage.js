@@ -3,7 +3,7 @@ import {Helmet} from "react-helmet/es/Helmet";
 import ReportsForm from "../fragments/reports/ReportsForm";
 import {connect} from "react-redux";
 import {createReportAction} from "../../redux/actions/reportActions";
-import backendReportsApi from "../../services/backendApis/backendReportsApi";
+import backendReportsApi from "../../services/backendApis/backendApi";
 
 class ReportsPage extends React.Component {
 

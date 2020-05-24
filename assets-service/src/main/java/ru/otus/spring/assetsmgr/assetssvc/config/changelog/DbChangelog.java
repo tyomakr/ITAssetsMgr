@@ -4,10 +4,10 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoDatabase;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import ru.otus.spring.assetsmgr.assetssvc.domain.Asset;
-import ru.otus.spring.assetsmgr.assetssvc.domain.Employee;
-import ru.otus.spring.assetsmgr.assetssvc.domain.enums.AssetType;
-import ru.otus.spring.assetsmgr.assetssvc.domain.enums.Status;
+import ru.otus.spring.assetsmgr.common.models.domain.Asset;
+import ru.otus.spring.assetsmgr.common.models.domain.Employee;
+import ru.otus.spring.assetsmgr.common.models.domain.enums.AssetType;
+import ru.otus.spring.assetsmgr.common.models.domain.enums.Status;
 
 import java.util.ArrayList;
 import java.util.List;

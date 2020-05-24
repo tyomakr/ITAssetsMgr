@@ -1,4 +1,4 @@
-package ru.otus.spring.assetsmgr.assetssvc.domain;
+package ru.otus.spring.assetsmgr.common.models.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

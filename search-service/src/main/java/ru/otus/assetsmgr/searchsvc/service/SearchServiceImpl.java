@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-import ru.otus.assetsmgr.searchsvc.domain.Asset;
+import ru.otus.spring.assetsmgr.common.models.domain.Asset;
 
 import java.util.ArrayList;
 import java.util.List;

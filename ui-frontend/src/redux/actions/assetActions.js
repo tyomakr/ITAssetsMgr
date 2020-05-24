@@ -1,4 +1,5 @@
-import backendApi from "../../services/backendApis/backendAssetsApi";
+// import backendApi from "../../services/backendApis/backendAssetsApi";
+import backendReportsApi from "../../services/backendApis/backendApi";
 import history from "../../components/history";
 
 export const CREATE_ASSET = 'CREATE_ASSET';
@@ -9,7 +10,7 @@ export const DELETE_ASSET = 'DELETE_ASSET';
 
 
 export const getAssetsAction = () => async dispatch => {
-    const response = await backendApi.get(`/assets/all`);
+    const response = await backendReportsApi.getAssetsData().get(`/assets/all`);
     dispatch({
         type: GET_ASSETS,
         payload: response.data
@@ -17,7 +18,7 @@ export const getAssetsAction = () => async dispatch => {
 };
 
 export const getAssetAction = id => async dispatch => {
-    const response = await backendApi.get(`/assets/${id}`);
+    const response = await backendReportsApi.getAssetsData().get(`/assets/${id}`);
     dispatch({
         type: GET_ASSET,
         payload: response.data
@@ -25,7 +26,7 @@ export const getAssetAction = id => async dispatch => {
 };
 
 export const createAssetAction = (formValues) => async (dispatch) => {
-    const response = await backendApi.post('/assets', { ...formValues });
+    const response = await backendReportsApi.getAssetsData().post('/assets', { ...formValues });
     dispatch({
         type: CREATE_ASSET,
         payload: response.data
@@ -33,7 +34,7 @@ export const createAssetAction = (formValues) => async (dispatch) => {
 };
 
 export const updateAssetAction = (id, formValues) => async (dispatch) => {
-    const response = await backendApi.put(`/assets/${id}`, {...formValues });
+    const response = await backendReportsApi.getAssetsData().put(`/assets/${id}`, {...formValues });
     dispatch({
         type: UPDATE_ASSET,
         payload: response.data
@@ -41,7 +42,7 @@ export const updateAssetAction = (id, formValues) => async (dispatch) => {
 };
 
 export const deleteAssetAction = id => async dispatch => {
-    await backendApi.delete(`/assets/${id}`);
+    await backendReportsApi.getAssetsData().delete(`/assets/${id}`);
     dispatch({
         type: DELETE_ASSET,
         payload: id

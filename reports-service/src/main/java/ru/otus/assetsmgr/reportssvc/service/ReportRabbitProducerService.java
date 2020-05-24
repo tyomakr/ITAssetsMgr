@@ -2,25 +2,21 @@ package ru.otus.assetsmgr.reportssvc.service;
 
 import com.rabbitmq.client.Return;
 import com.rabbitmq.client.ReturnCallback;
-import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor
 public class ReportRabbitProducerService implements RabbitTemplate.ConfirmCallback, ReturnCallback {
 
     private static final String MAIN_EXCHANGE_NAME = "main-exchange";
     private final RabbitTemplate rabbitTemplate;
 
-
-    @PostConstruct
-    public void init() {
+    public ReportRabbitProducerService(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
         rabbitTemplate.setConfirmCallback(this);
     }
 

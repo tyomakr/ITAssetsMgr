@@ -71,6 +71,13 @@
             <version>2.8.6</version>
         </dependency>
 
+        <!-- app domain models -->
+        <dependency>
+            <groupId>ru.otus.spring.assetsmgr</groupId>
+            <artifactId>common-models</artifactId>
+            <version>0.1</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -84,6 +91,26 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <!-- local repo for common-models -->
+        <repository>
+            <id>localrepo</id>
+            <name>localrepo</name>
+            <url>file:home/localrepo</url>
+        </repository>
+        <!-- Maven central repository -->
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 
     <build>
         <finalName>${project.artifactId}</finalName>

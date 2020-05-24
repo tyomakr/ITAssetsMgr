@@ -1,10 +1,15 @@
 import axios from 'axios';
 
 const baseUrlApi = "http://localhost:8080/api";
+const baseUrlAssetService = baseUrlApi + "/assets-service/v1/";
 const baseUrlReportService = baseUrlApi + "/reports-service/v1/";
 const baseUrlReportPdfCreator = baseUrlReportService + "reports/pdf";
 
-class BackendReportsApi {
+class BackendApi {
+
+    getAssetsData() {
+        return axios.create({baseURL: baseUrlAssetService})
+    }
 
     requestReportData() {
         return axios.create({ baseURL: baseUrlReportService})
@@ -32,4 +37,4 @@ class BackendReportsApi {
     }
 }
 
-export default new BackendReportsApi();
+export default new BackendApi();

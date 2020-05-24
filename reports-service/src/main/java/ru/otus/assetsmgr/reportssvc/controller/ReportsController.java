@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-import ru.otus.assetsmgr.reportssvc.domain.Asset;
 import ru.otus.assetsmgr.reportssvc.service.ReportRabbitProducerService;
 import ru.otus.assetsmgr.reportssvc.service.ReportsService;
+import ru.otus.spring.assetsmgr.common.models.domain.Asset;
 
 
 @RestController
@@ -36,7 +36,7 @@ public class ReportsController {
     @ResponseBody
     @PostMapping(value = "/v1/reports/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
     public Mono<byte[]> createPdfReport(@RequestBody String requestJson) {
-        byte[] bytes = reportsService.createPDF(requestJson);
+        byte[] bytes = reportsService.createReportFile(requestJson);
         return Mono.just(bytes);
     }
 }
